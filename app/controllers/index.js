@@ -11,13 +11,37 @@ var osname = Ti.Platform.osname,
 	height = Ti.Platform.displayCaps.platformHeight,
 	width = Ti.Platform.displayCaps.platformWidth;
 
+var fbbutton = Titanium.Facebook.createLoginButton({
+	style: Ti.Facebook.BUTTON_STYLE_WIDE
+});
+
+// APP ID
+Ti.Facebook.appid = 185299698279540;
+Ti.Facebook.permissions = ['publish_stream'];
+
+Ti.Facebook.addEventListener('logout', function(e) {
+	alert('Logged out');
+});
+Ti.Facebook.logout();
+
+Ti.Facebook.addEventListener('login', function(e) {
+	if(e.success) {
+		alert('Logged In');
+	} else if(e.error) {
+		alert(e.error);
+	} else if(e.cancelled) {
+		alert("Canceled");
+	}
+});
 
 function doClick(e) {
 	console.log("OS " + osname + " " + version + " Screen Size: " + height + " x " + width);
 	Titanium.Media.showCamera({
 		success: function(event) {
-			console.log(event);
+
+			console.log("Media File: " + event.media);
 			$.image.image = event.media;
+			$.mainWindow.add(fbbutton);
 		},
 		cancel: function(event) {
 			console.log("Camera Cancelled");
@@ -30,7 +54,5 @@ function doClick(e) {
 		allowEditing: true
 	});
 }
-
-
 
 $.mainWindow.open();

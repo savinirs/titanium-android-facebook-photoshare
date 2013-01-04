@@ -3,8 +3,10 @@ function Controller() {
         console.log("OS " + osname + " " + version + " Screen Size: " + height + " x " + width);
         Titanium.Media.showCamera({
             success: function(event) {
-                console.log(event);
+                console.log("Media File: " + event.media);
+                $.picTitle.text = event.media;
                 $.image.image = event.media;
+                $.mainWindow.add(fbbutton);
             },
             cancel: function(event) {
                 console.log("Camera Cancelled");
@@ -35,6 +37,13 @@ function Controller() {
     }), "Button", $.__views.mainWindow);
     $.__views.mainWindow.add($.__views.button);
     doClick ? $.__views.button.on("click", doClick) : __defers["$.__views.button!click!doClick"] = !0;
+    $.__views.picTitle = A$(Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        color: "#000",
+        id: "picTitle"
+    }), "Label", $.__views.mainWindow);
+    $.__views.mainWindow.add($.__views.picTitle);
     $.__views.image = A$(Ti.UI.createImageView({
         id: "image",
         width: "90%",
@@ -43,7 +52,18 @@ function Controller() {
     $.__views.mainWindow.add($.__views.image);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var osname = "android", version = Ti.Platform.version, height = Ti.Platform.displayCaps.platformHeight, width = Ti.Platform.displayCaps.platformWidth;
+    var osname = "android", version = Ti.Platform.version, height = Ti.Platform.displayCaps.platformHeight, width = Ti.Platform.displayCaps.platformWidth, fbbutton = Titanium.Facebook.createLoginButton({
+        style: Ti.Facebook.BUTTON_STYLE_WIDE
+    });
+    Ti.Facebook.appid = 185299698279540;
+    Ti.Facebook.permissions = [ "publish_stream" ];
+    Ti.Facebook.addEventListener("logout", function(e) {
+        alert("Logged out");
+    });
+    Ti.Facebook.logout();
+    Ti.Facebook.addEventListener("login", function(e) {
+        e.success ? alert("Logged In") : e.error ? alert(e.error) : e.cancelled && alert("Canceled");
+    });
     $.mainWindow.open();
     __defers["$.__views.button!click!doClick"] && $.__views.button.on("click", doClick);
     _.extend($, exports);
