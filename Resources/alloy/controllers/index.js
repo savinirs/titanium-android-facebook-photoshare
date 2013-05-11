@@ -108,7 +108,7 @@ function Controller() {
     });
     var shareFbButton = Titanium.UI.createButton({
         title: "Share",
-        height: 50,
+        height: 30,
         width: 100
     });
     fb.appid = 0xa88772b16474;
