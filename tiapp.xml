@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><ti:app xmlns:ti="http://ti.appcelerator.org">
 	<id>com.junwatu.app.android</id>
-	<name>Katut</name>
+	<name>Titanium.Android.Facebook.PhotoShare</name>
 	<version>1.0</version>
 	<publisher>junwatu.com</publisher>
 	<url>http://www.junwatu.com/apps/katut</url>
-	<description>Capture or record anything you like and share on google+, twitter or facebook!</description>
+	<description>Capture and share to facebook!</description>
 	<copyright>GPL</copyright>
 	<icon>appicon.png</icon>
 	<persistent-wifi>false</persistent-wifi>
@@ -19,12 +19,13 @@
 	<android xmlns:android="http://schemas.android.com/apk/res/android">
 	</android>
 	<modules>
-	<module platform="android" version="1.0">ti.physicalSizeCategory</module>
-</modules>
+		<module platform="android" version="1.0">ti.physicalSizeCategory</module>
+		<module platform="android">facebook</module>
+	</modules>
 	<deployment-targets>
 		<target device="android">true</target>
 	</deployment-targets>
-	<sdk-version>3.0.1.v20121228113204</sdk-version>
+	<sdk-version>3.1.0.GA</sdk-version>
 <plugins><plugin version="1.0">ti.alloy</plugin>
 </plugins>
 </ti:app>

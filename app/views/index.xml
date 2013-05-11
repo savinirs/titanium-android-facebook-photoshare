@@ -1,7 +1,11 @@
 <Alloy>
 	<Window class="container" layout="vertical" id="mainWindow">
-		<Button id="button" onClick="doClick" width="100"
-		 top="10" height="50">Shoot!</Button>
-		<ImageView id='image' width="90%" height="80%"/>
+		<ImageView id='image' width="90%" height="60%"/>
+		<Label id="picTitle"/>
+		<Button id="button" onClick="doClick" width="100%" height="60" top="5">Capture!</Button>
+		<View layout="vertical" id="controls" height="40%">
+			<TextArea id="messagePost" width="100%" visible="false" height="40%"/>
+			<View layout="horizontal" id="shareButtonsContainer" height="60%"/>
+		</View>
 	</Window>
 </Alloy>
